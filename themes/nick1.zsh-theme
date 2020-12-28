@@ -1,7 +1,19 @@
-# kphoen.zsh-theme
+# nick1.zsh-theme
+
+export VIRTUAL_ENV_DISABLE_PROMPT=yes
+
+function virtenv_indicator {
+    if [[ -z $VIRTUAL_ENV ]] then
+        psvar[1]=''
+    else
+        psvar[1]='(env: '${VIRTUAL_ENV##*/}') '
+    fi
+}
+
+add-zsh-hook precmd virtenv_indicator
 
 if [[ "$TERM" != "dumb" ]] && [[ "$DISABLE_LS_COLORS" != "true" ]]; then
-    PROMPT='[%{$fg[red]%}%n%{$reset_color%}@%{$fg[magenta]%}%m%{$reset_color%}:%{$FG[039]%}%~%{$reset_color%}$(git_prompt_info)]
+    PROMPT='[%(1V.%1v.)%{$fg[red]%}%n%{$reset_color%}@%{$fg[magenta]%}%m%{$reset_color%}:%{$FG[039]%}%~%{$reset_color%}$(git_prompt_info)]
 %# '
 
     ZSH_THEME_GIT_PROMPT_PREFIX=" on %{$fg[green]%}"
